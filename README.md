@@ -1,4 +1,6 @@
-# DevOps Capstone Template
+# devops-capstone-project
+
+A customer account microservice for an e-commerce website, built with Python Flask and PostgreSQL. This capstone extends the create-account endpoint with REST APIs to read, update, delete, and list accounts. Work is planned in GitHub Projects and includes test-driven development, Docker containerization, and Kubernetes deployment.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.9](https://img.shields.io/badge/Python-3.9-green.svg)](https://shields.io/)
