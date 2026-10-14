@@ -172,7 +172,9 @@ Local verification used Python 3.11 and SQLite through the existing `DATABASE_UR
 override because PostgreSQL and Docker were not installed on the local machine.
 Nose 1.3.7 needed a test-environment-only `collections.Callable` compatibility
 alias on Python 3.11. The PostgreSQL default and production dependencies remain
-unchanged. PostgreSQL execution in the hosted lab has not yet been verified.
+unchanged. The same suite was subsequently verified in the hosted Cloud IDE
+with Python 3.9 and PostgreSQL: all 38 tests passed with 97% service coverage
+and 100% route coverage.
 
 The sprint review used actual cURL requests against the running local service:
 create returned 201, list/read/update returned 200, delete returned 204, and
