@@ -8,6 +8,7 @@ Test cases can be run with the following:
 import os
 import logging
 from unittest import TestCase
+from unittest.mock import patch
 from tests.factories import AccountFactory
 from service.common import status  # HTTP Status Codes
 from service.models import db, Account, init_db
@@ -261,3 +262,11 @@ class TestAccountService(TestCase):
             content_type="application/json; charset=utf-8"
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_internal_server_error(self):
+        """Unexpected database errors return the service's JSON 500 response"""
+        with patch.object(Account, "all", side_effect=RuntimeError("Database unavailable")):
+            with patch.dict(app.config, {"TESTING": False}):
+                response = self.client.get(BASE_URL)
+        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        self.assertEqual(response.get_json()["error"], "Internal Server Error")

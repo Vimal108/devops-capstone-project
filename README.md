@@ -133,3 +133,47 @@ You can now perform Tekton development locally, just like in the Cloud IDE lab e
 Licensed under the Apache License. See [LICENSE](LICENSE)
 
 ## <h3 align="center"> © IBM Corporation 2022. All rights reserved. <h3/>
+
+## Sprint 1 REST service
+
+The account service supports the complete REST lifecycle:
+
+| Method | Path | Result |
+| --- | --- | --- |
+| POST | `/accounts` | Create an account; `201` and a resource `Location` |
+| GET | `/accounts` | List accounts as a JSON array; `200` |
+| GET | `/accounts/{id}` | Read one account; `200`, or `404` |
+| PUT | `/accounts/{id}` | Replace account details; `200`, or `404` |
+| DELETE | `/accounts/{id}` | Delete an account idempotently; `204` |
+
+POST and PUT require `application/json` (an optional charset is accepted).
+Invalid JSON, incomplete account data, or an invalid ISO date returns `400`.
+Rejected updates leave existing data unchanged, and request IDs cannot change the resource ID.
+
+### Test-driven development and verification
+
+Sprint 1 added the API contract tests before implementing the routes. The initial
+route suite ran 23 tests with 15 expected failures against the starter code.
+After implementation, all 38 tests passed with **97% service coverage** and
+**100% route coverage**. `setup.cfg` enables Nose, the specification report,
+Coverage, and a minimum coverage threshold of 95%. Flake8 passed with no findings.
+
+In the Skills Network Python 3.9 environment, start PostgreSQL, activate the
+virtual environment, install dependencies, and run:
+
+```bash
+nosetests -v
+coverage report -m
+make lint
+flask run --host=0.0.0.0 --port=8080
+```
+
+Local verification used Python 3.11 and SQLite through the existing `DATABASE_URI`
+override because PostgreSQL and Docker were not installed on the local machine.
+Nose 1.3.7 needed a test-environment-only `collections.Callable` compatibility
+alias on Python 3.11. The PostgreSQL default and production dependencies remain
+unchanged. PostgreSQL execution in the hosted lab has not yet been verified.
+
+The sprint review used actual cURL requests against the running local service:
+create returned 201, list/read/update returned 200, delete returned 204, and
+reading the deleted account returned 404. No deployment is claimed by this sprint.

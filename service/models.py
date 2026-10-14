@@ -132,6 +132,8 @@ class Account(db.Model, PersistentBase):
                 "Invalid Account: body of request contained "
                 "bad or no data - " + error.args[0]
             ) from error
+        except ValueError as error:
+            raise DataValidationError("Invalid Account: date_joined must be an ISO date") from error
         return self
 
     @classmethod
