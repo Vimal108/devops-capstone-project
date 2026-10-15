@@ -1,5 +1,7 @@
 # devops-capstone-project
 
+[![Build Status](https://github.com/Vimal108/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)](https://github.com/Vimal108/devops-capstone-project/actions/workflows/ci-build.yaml)
+
 A customer account microservice for an e-commerce website, built with Python Flask and PostgreSQL. This capstone extends the create-account endpoint with REST APIs to read, update, delete, and list accounts. Work is planned in GitHub Projects and includes test-driven development, Docker containerization, and Kubernetes deployment.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
